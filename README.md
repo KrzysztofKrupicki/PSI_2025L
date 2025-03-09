@@ -4,4 +4,4 @@
 Krzysztof Krupicki - kierownik\
 Jakub Pucyk
 
-[Sprawozdanie 1 - Analiza modelu biznesowego](Sprawozdania/Sprawozdanie 1 - Analiza modelu biznesowego.pdf)
+Sprawozdanie 1 - Analiza modelu biznesowego [LINK](Sprawozdania/Sprawozdanie%201%20-%20Analiza%20modelu%20biznesowego.pdf)
