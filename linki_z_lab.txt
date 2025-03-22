@@ -11,3 +11,8 @@ https://enzomind.com/files/uwm/wyklady/PSI/cw02_Modelowanie_biznesowe/cw02_Model
 https://enzomind.com/files/uwm/wyklady/PSI/cw02_Modelowanie_biznesowe/Przykłady/MB_OpisFirmy_Wypozyczalnia.pdf
 https://enzomind.com/files/uwm/wyklady/PSI/cw02_Modelowanie_biznesowe/Przykłady/Opis firmy budowlanej  z magazynem.pdf
 https://enzomind.com/files/uwm/wyklady/PSI/cw02_Modelowanie_biznesowe/Przykłady/Opis osrodka wypoczynkowego.pdf
+
+CW3 i CW4
+https://enzomind.com/files/uwm/wyklady/PSI/cw03_1_Specyfikacja_wymagan/cw03_UML_DPU.pdf
+https://enzomind.com/files/uwm/wyklady/PSI/cw03_1_Specyfikacja_wymagan/cw03_Specyfikacja_wymagan.pdf
+https://enzomind.com/files/uwm/wyklady/PSI/cw03_1_Specyfikacja_wymagan/cw03_UML_DPU_SEW.pdf
