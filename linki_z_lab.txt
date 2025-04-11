@@ -16,3 +16,17 @@ CW3 i CW4
 https://enzomind.com/files/uwm/wyklady/PSI/cw03_1_Specyfikacja_wymagan/cw03_UML_DPU.pdf
 https://enzomind.com/files/uwm/wyklady/PSI/cw03_1_Specyfikacja_wymagan/cw03_Specyfikacja_wymagan.pdf
 https://enzomind.com/files/uwm/wyklady/PSI/cw03_1_Specyfikacja_wymagan/cw03_UML_DPU_SEW.pdf
+
+CW5
+https://enzomind.com/files/uwm/wyklady/PSI/cw04_Modelowanie_analityczne/cw05_Modelowanie_analityczne.pdf
+
+CW6
+https://enzomind.com/files/uwm/wyklady/PSI/cw05_1_Modelowanie_struktury_diagram_klas/cw05_00_obiektowoscPojecia.pdf
+https://enzomind.com/files/uwm/wyklady/PSI/cw05_1_Modelowanie_struktury_diagram_klas/cw05_UML_DK.pdf
+https://enzomind.com/files/uwm/wyklady/PSI/cw05_1_Modelowanie_struktury_diagram_klas/cw05_UML_DK_zwiazki_zaleznosc_realizacja.pdf
+
+CW7
+https://enzomind.com/files/uwm/wyklady/PSI/cw05_2_Modelowanie_struktury_diagram_obiektow/cw05_2_UML_DO.pdf
+https://enzomind.com/files/uwm/wyklady/PSI/cw05_2_Modelowanie_struktury_diagram_obiektow/cw05_2_DiagramObiektów_ZPE_przyklad.pdf
+
+CW8
