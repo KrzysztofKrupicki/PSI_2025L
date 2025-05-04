@@ -1,0 +1,83 @@
+@startuml
+' Konfiguracja wyglądu
+skinparam classAttributeIconSize 0
+skinparam objectAttributeFontSize 11
+
+' Obiekty
+object Uzytkownik {
+  imie = "Jan"
+  nazwisko = "Kowalski"
+  email = "jan.kowalski@example.com"
+}
+
+object Rola {
+  nazwa = "Nadawca"
+}
+
+object Przesylka {
+  numer = "PK123456789"
+  dataNadania = "2025-05-01"
+  gabaryt = "M"
+}
+
+object StatusPrzesylki {
+  status = "W drodze"
+  data = "2025-05-02"
+}
+
+object HistoriaStatusow {
+  historia = ["Nadana", "W sortowni", "W drodze"]
+}
+
+object Kurier {
+  imie = "Anna"
+  nazwisko = "Nowak"
+  idKurier = "K123"
+}
+
+object Pojazd {
+  typ = "Van"
+  numerRejestracyjny = "WX 12345"
+}
+
+object Oddzial {
+  nazwa = "Oddział Warszawa"
+}
+
+object Automat {
+  id = "A123"
+  lokalizacja = "Warszawa, ul. Przykładowa 1"
+}
+
+object Skrytka {
+  numer = "SK45"
+}
+
+object Platnosc {
+  kwota = "15.00 PLN"
+  data = "2025-05-01"
+}
+
+object MetodaPlatnosci {
+  typ = "Karta płatnicza"
+}
+
+object Reklamacja {
+  opis = "Opóźnienie w dostawie"
+  dataZgloszenia = "2025-05-03"
+}
+
+' Relacje między obiektami
+Uzytkownik -- Rola : ma rolę
+Uzytkownik -- Przesylka : nadaje
+Przesylka -- StatusPrzesylki : ma status
+Przesylka -- HistoriaStatusow : ma historię
+Przesylka -- Kurier : przypisany kurier
+Kurier -- Pojazd : używa pojazdu
+Kurier -- Oddzial : zatrudniony w
+Przesylka -- Skrytka : przypisana do
+Skrytka -- Automat : znajduje się w
+Przesylka -- Platnosc : opłacona przez
+Platnosc -- MetodaPlatnosci : dokonana za pomocą
+Przesylka -- Reklamacja : ma reklamację
+@enduml

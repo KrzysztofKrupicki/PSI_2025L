@@ -29,4 +29,6 @@ CW7
 https://enzomind.com/files/uwm/wyklady/PSI/cw05_2_Modelowanie_struktury_diagram_obiektow/cw05_2_UML_DO.pdf
 https://enzomind.com/files/uwm/wyklady/PSI/cw05_2_Modelowanie_struktury_diagram_obiektow/cw05_2_DiagramObiektów_ZPE_przyklad.pdf
 
-CW8
+CW8 i CW9
+https://enzomind.com/files/uwm/wyklady/PSI/cw06_1_Projektowanie_danych/cw06_1_DKaRBD.pdf
+https://enzomind.com/files/uwm/wyklady/PSI/cw06_1_Projektowanie_danych/cw06_2_RBD_normalizacja.pdf
