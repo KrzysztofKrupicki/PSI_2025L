@@ -1,0 +1,74 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Użytkownik
+actor Klient
+actor Kurier
+actor "Operator systemu" as Operator
+actor "Pracownik obsługi klienta" as Pracownik
+actor "Automat przesyłkowy" as Automat
+actor "System BLIK" as BLIK
+actor "System kart płatniczych" as Karta
+
+rectangle "System Zarządzania Przesyłkami" {
+  
+  usecase "Zarejestruj konto" as UC1
+  usecase "Zaloguj się" as UC2
+  usecase "Zarządzaj kontem" as UC3
+  usecase "Resetuj hasło" as UC2a
+  usecase "Weryfikuj dane logowania" as UC2b
+  usecase "Nadaj przesyłkę" as UC4
+  usecase "Zarządzaj przesyłkami" as UC5
+  usecase "Śledź przesyłkę" as UC6
+  usecase "Zwróć przesyłkę" as UC7
+  usecase "Złóż reklamację" as UC8
+  usecase "Odbierz przesyłkę" as UC9
+  usecase "Dostarcz przesyłkę" as UC10
+  usecase "Zarządzaj reklamacją" as UC11
+  usecase "Zarządzaj użytkownikami" as UC12
+  usecase "Zarządzaj automatami" as UC13
+  usecase "Zarządzaj oddziałami i pracownikami" as UC14
+  usecase "Zrealizuj płatność" as UC15
+  usecase "Wybierz metodę płatności" as UC15a
+}
+
+Użytkownik --|> Klient
+Użytkownik --|> Kurier
+Użytkownik --|> Operator
+Użytkownik --|> Pracownik
+
+Klient --> UC1
+Klient --> UC2
+Klient --> UC3
+Klient --> UC4
+Klient --> UC5
+Klient --> UC6
+Klient --> UC7
+Klient --> UC8
+Klient --> UC9
+Klient --> UC15
+
+Karta --> UC15
+BLIK --> UC15
+
+Kurier --> UC10
+Kurier --> UC5
+
+Pracownik --> UC11
+
+Operator --> UC12
+Operator --> UC13
+Operator --> UC14
+
+Automat --> UC9
+Automat --> UC4
+
+' <<include>>: obowiązkowe działania podrzędne
+UC2 --> UC2b : <<include>>
+UC15 --> UC15a : <<include>>
+
+' <<extend>>: opcjonalne działania
+UC2 --> UC2a : <<extend>>
+
+@enduml
