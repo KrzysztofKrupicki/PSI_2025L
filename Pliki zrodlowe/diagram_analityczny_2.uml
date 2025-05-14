@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+
+actor Klient
+actor Kurier
+actor SystemBLIK
+actor SystemKartPlatniczych
+
+package "UC05: Nadaj przesyłkę" {
+  boundary PanelDoNadawania as "Panel do nadań"
+  control KontrolerNadan as "Kontroler nadań"
+  entity UC05_Przesylka as "Przesyłka"
+  entity Platnosc as "Płatność"
+  entity Etykieta
+  boundary PanelDoPlatnosci as "Panel do płatności"
+  control KontrolerPlatnosci as "Kontroler płatności"
+
+  Klient --> PanelDoNadawania
+  PanelDoNadawania -- KontrolerNadan
+  KontrolerNadan -- UC05_Przesylka
+  KontrolerNadan -- Etykieta
+  KontrolerNadan -- PanelDoPlatnosci
+  PanelDoPlatnosci -- KontrolerPlatnosci
+  KontrolerPlatnosci -- Platnosc
+  Platnosc --> SystemBLIK
+  Platnosc --> SystemKartPlatniczych
+}
+
+package "UC04: Dostarcz przesyłkę" {
+  boundary PanelDostarczenia as "Panel dostarczenia"
+  control KontrolerDostarczenia as "Kontroler dostarczenia"
+  entity UC04_Przesylka as "Przesyłka"
+
+  Kurier --> PanelDostarczenia
+  PanelDostarczenia -- KontrolerDostarczenia
+  KontrolerDostarczenia -- UC04_Przesylka
+}
+
+package "UC06: Odbierz przesyłkę" {
+  boundary PanelDoOdbioru as "Panel do odbioru"
+  control KontrolerOdbioru as "Kontroler odbioru"
+  entity UC06_Przesylka as "Przesyłka"
+
+  Klient --> PanelDoOdbioru
+  PanelDoOdbioru -- KontrolerOdbioru
+  KontrolerOdbioru -- UC06_Przesylka
+}
+
+package "UC07: Śledź przesyłkę" {
+  boundary PanelDoSledzenia as "Panel do śledzenia"
+  control KontrolerSledzenia as "Kontroler śledzenia"
+  entity UC07_Przesylka as "Przesyłka"
+
+  Klient --> PanelDoSledzenia
+  PanelDoSledzenia -- KontrolerSledzenia
+  KontrolerSledzenia -- UC07_Przesylka
+}
+@enduml
