@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System Firmy kurierskiej</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 20px 25px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      margin: 0rem;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    select,
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.3rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      min-width: 120px;
+      height: 40px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      background: #f0f0f0;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+
+    .back-btn {
+      margin-top: 1rem;
+      width: 100%;
+      background: #007bff;
+      display: block;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+
+    input.editable,
+    select.editable {
+      border: 1px solid #007bff;
+      background-color: #e6f0ff;
+    }
+
+    fieldset {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 1.05rem;
+      padding: 0 6px;
+    }
+
+    .form-pair {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 1rem;
+      row-gap: 0;
+      align-items: flex-end;
+    }
+
+    .form-pair>div {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 0.7rem;
+    }
+
+    .button-group button {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .button-group button {
+      flex: 1;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      background-color: #007bff;
+      color: white;
+      max-width: 120px;
+    }
+
+    .button-group button.edit {
+      background-color: #ffc107;
+      color: #222;
+      font-size: 0.95rem;
+      max-width: 80px;
+    }
+
+    .button-group button.delete {
+      background-color: #dc3545;
+      font-size: 0.95rem;
+      max-width: 80px;
+    }
+
+    .button-group button.save,
+    .button-group button.zapisz-kurier,
+    .button-group button.zapisz-pojazd,
+    .button-group button.anuluj-kurier,
+    .button-group button.anuluj-pojazd {
+      background-color: #28a745;
+      color: white;
+      min-width: 0;
+      max-width: none;
+      width: 100%;
+      font-size: 1.05rem;
+      padding: 0.5rem 1.2rem;
+      box-sizing: border-box;
+    }
+
+    .button-group button.anuluj-kurier,
+    .button-group button.anuluj-pojazd {
+      background-color: #dc3545;
+    }
+
+    .button-group button.edit:hover {
+      background-color: #e0a800;
+    }
+
+    .button-group button.delete:hover,
+    .button-group button.anuluj-kurier:hover,
+    .button-group button.anuluj-pojazd:hover {
+      background-color: #a71d2a;
+    }
+
+    .button-group button.save:hover,
+    .button-group button.zapisz-kurier:hover,
+    .button-group button.zapisz-pojazd:hover {
+      background-color: #1e7e34;
+    }
+
+    .form-pair>div>button {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      font-size: 1rem;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    #flotaSection {
+      display: none;
+    }
+
+    .zapisz-kurier,
+    .zapisz-pojazd {
+      background-color: #28a745 !important;
+      color: #fff !important;
+    }
+
+    .zapisz-kurier:hover,
+    .zapisz-pojazd:hover {
+      background-color: #1e7e34 !important;
+    }
+
+    .anuluj-kurier,
+    .anuluj-pojazd {
+      background-color: #dc3545 !important;
+      color: #fff !important;
+    }
+
+    .anuluj-kurier:hover,
+    .anuluj-pojazd:hover {
+      background-color: #a71d2a !important;
+    }
+
+    .zapisz-kurier,
+    .zapisz-pojazd,
+    .anuluj-kurier,
+    .anuluj-pojazd,
+    #dodajKurierBtn,
+    #dodajPojazdBtn {
+      margin-top: 0.3rem !important;
+      margin-bottom: 0.3rem !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    Zarządzanie oddziałami, flotą i kurierami
+  </header>
+
+  <div class="container">
+    <label for="oddzialSelect">Wybierz oddział</label>
+    <select id="oddzialSelect">
+      <option value="">-- wybierz oddział --</option>
+    </select>
+
+    <section id="kurierzySection" style="display:none;">
+      <h2>Kurierzy w oddziale</h2>
+      <table id="kurierzyTable">
+        <thead>
+          <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Godziny pracy</th>
+            <th>Wynagrodzenie (PLN)</th>
+            <th>Pojazd</th>
+            <th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <fieldset>
+        <legend>
+          <h3>Dodaj kuriera do oddziału</h3>
+        </legend>
+        <div class="form-row">
+          <div class="form-pair">
+            <div>
+              <label for="nowyImie">Imię</label>
+              <input type="text" id="nowyImie" placeholder="Imię" />
+            </div>
+            <div>
+              <label for="nowyNazwisko">Nazwisko</label>
+              <input type="text" id="nowyNazwisko" placeholder="Nazwisko" />
+            </div>
+          </div>
+
+          <div class="form-pair">
+            <div>
+              <label for="noweGodziny">Godziny pracy</label>
+              <input type="text" id="noweGodziny" placeholder="np. 9:00-17:00" />
+            </div>
+            <div>
+              <label for="noweWynagrodzenie">Wynagrodzenie (PLN)</label>
+              <input type="number" id="noweWynagrodzenie" placeholder="np. 3500" />
+            </div>
+          </div>
+
+          <div class="form-pair">
+            <div>
+              <label for="pojazdSelect">Przypisz pojazd</label>
+              <select id="pojazdSelect">
+                <option value="">-- wybierz pojazd --</option>
+              </select>
+            </div>
+            <div>
+              <button id="dodajKurierBtn">Dodaj kuriera</button>
+            </div>
+          </div>
+        </div>
+
+      </fieldset>
+    </section>
+
+    <section id="flotaSection">
+      <h2>Zarządzanie flotą pojazdów</h2>
+      <table id="flotaTable">
+        <thead>
+          <tr>
+            <th>Numer rejestracyjny</th>
+            <th>Typ pojazdu</th>
+            <th>Pojemność (m³)</th>
+            <th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <fieldset>
+        <legend>
+          <h3>Dodaj pojazd</h3>
+        </legend>
+        <div class="form-pair">
+          <div>
+            <label for="nowyNrRej">Numer rejestracyjny</label>
+            <input type="text" id="nowyNrRej" placeholder="np. XYZ 1234" />
+          </div>
+          <div>
+            <label for="nowyTypPojazdu">Typ pojazdu</label>
+            <input type="text" id="nowyTypPojazdu" placeholder="np. Van" />
+          </div>
+        </div>
+
+        <div class="form-pair">
+          <div>
+            <label for="nowaPojemnosc">Pojemność (m³)</label>
+            <input type="number" id="nowaPojemnosc" placeholder="np. 12" />
+          </div>
+          <div>
+            <button id="dodajPojazdBtn">Dodaj pojazd</button>
+          </div>
+        </div>
+
+      </fieldset>
+    </section>
+
+    <button class="back-btn" onclick="window.location.href='dashboard.html'">Wróć</button>
+  </div>
+
+  <script>
+    // Demo dane - zastąp rzeczywistymi danymi z backendu
+    const oddzialy = [
+      { id: 1, nazwa: "Oddział Warszawa" },
+      { id: 2, nazwa: "Oddział Kraków" }
+    ];
+
+    const flota = [
+      { id: 1, nrRej: "WX12345", typ: "Van", pojemnosc: 12 },
+      { id: 2, nrRej: "KR54321", typ: "Samochód dostawczy", pojemnosc: 20 }
+    ];
+
+    let kurierzy = [
+      { id: 1, oddzialId: 1, imie: "Jan", nazwisko: "Kowalski", godzinyPracy: "9:00-17:00", wynagrodzenie: 3500, pojazdId: 1 },
+      { id: 2, oddzialId: 1, imie: "Anna", nazwisko: "Nowak", godzinyPracy: "8:00-16:00", wynagrodzenie: 3600, pojazdId: null },
+      { id: 3, oddzialId: 2, imie: "Piotr", nazwisko: "Zieliński", godzinyPracy: "10:00-18:00", wynagrodzenie: 3700, pojazdId: 2 }
+    ];
+
+    const oddzialSelect = document.getElementById("oddzialSelect");
+    const kurierzySection = document.getElementById("kurierzySection");
+    const kurierzyTableBody = document.querySelector("#kurierzyTable tbody");
+    const flotaSection = document.getElementById("flotaSection");
+    const flotaTableBody = document.querySelector("#flotaTable tbody");
+
+    const nowyImie = document.getElementById("nowyImie");
+    const nowyNazwisko = document.getElementById("nowyNazwisko");
+    const noweGodziny = document.getElementById("noweGodziny");
+    const noweWynagrodzenie = document.getElementById("noweWynagrodzenie");
+    const pojazdSelect = document.getElementById("pojazdSelect");
+    const dodajKurierBtn = document.getElementById("dodajKurierBtn");
+
+    const nowyNrRej = document.getElementById("nowyNrRej");
+    const nowyTypPojazdu = document.getElementById("nowyTypPojazdu");
+    const nowaPojemnosc = document.getElementById("nowaPojemnosc");
+    const dodajPojazdBtn = document.getElementById("dodajPojazdBtn");
+
+    // Inicjalizacja listy oddziałów i pojazdów
+    function init() {
+      oddzialy.forEach(o => {
+        const option = document.createElement("option");
+        option.value = o.id;
+        option.textContent = o.nazwa;
+        oddzialSelect.appendChild(option);
+      });
+      renderFlotaSelect();
+      renderFlotaTable();
+    }
+
+    // Render lista pojazdów w select dla kurierów
+    function renderFlotaSelect() {
+      pojazdSelect.innerHTML = '<option value="">-- wybierz pojazd --</option>';
+      flota.forEach(p => {
+        const option = document.createElement("option");
+        option.value = p.id;
+        option.textContent = `${p.nrRej} (${p.typ})`;
+        pojazdSelect.appendChild(option);
+      });
+    }
+
+    // Render tabela kurierów danego oddziału
+    function renderKurierzy() {
+      const oddzialId = parseInt(oddzialSelect.value);
+      if (!oddzialId) {
+        kurierzySection.style.display = "none";
+        return;
+      }
+      kurierzySection.style.display = "block";
+
+      const kurierzyOddzialu = kurierzy.filter(k => k.oddzialId === oddzialId);
+
+      kurierzyTableBody.innerHTML = "";
+
+      kurierzyOddzialu.forEach(k => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+        <td>${k.imie}</td>
+        <td>${k.nazwisko}</td>
+        <td>${k.godzinyPracy}</td>
+        <td>${k.wynagrodzenie}</td>
+        <td>${k.pojazdId ? (flota.find(p => p.id === k.pojazdId) ? flota.find(p => p.id === k.pojazdId).nrRej + ' (' + flota.find(p => p.id === k.pojazdId).typ + ')' : 'Brak') : 'Brak'}</td>
+        <td>
+          <div class="button-group">
+            <button class="edit" data-id="${k.id}">Edytuj</button>
+            <button class="delete" data-id="${k.id}">Usuń</button>
+          </div>
+        </td>
+      `;
+        kurierzyTableBody.appendChild(tr);
+      });
+    }
+    function renderFlotaTable() {
+      flotaTableBody.innerHTML = "";
+      flota.forEach(p => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+        <td>${p.nrRej}</td>
+        <td>${p.typ}</td>
+        <td>${p.pojemnosc}</td>
+        <td>
+          <div class="button-group">
+            <button class="edit" data-id="${p.id}">Edytuj</button>
+            <button class="save" data-id="${p.id}" style="display:none;">Zapisz</button>
+            <button class="delete" data-id="${p.id}">Usuń</button>
+          </div>
+        </td>
+      `;
+        flotaTableBody.appendChild(tr);
+      });
+    }
+
+    // --- EDYCJA KURIERA W FORMULARZU ---
+    let edytowanyKurierId = null;
+    const kurierBtnDiv = document.querySelector('#dodajKurierBtn').parentElement;
+    let kurierBtnGroup = kurierBtnDiv.querySelector('.button-group');
+    if (!kurierBtnGroup) {
+      kurierBtnGroup = document.createElement('div');
+      kurierBtnGroup.className = 'button-group';
+      kurierBtnDiv.appendChild(kurierBtnGroup);
+    }
+    const zapiszKurierBtn = document.createElement('button');
+    zapiszKurierBtn.textContent = 'Zapisz zmiany';
+    zapiszKurierBtn.type = 'button';
+    zapiszKurierBtn.className = 'zapisz-kurier';
+    const anulujKurierBtn = document.createElement('button');
+    anulujKurierBtn.textContent = 'Anuluj zmiany';
+    anulujKurierBtn.type = 'button';
+    anulujKurierBtn.className = 'anuluj-kurier';
+
+    function showKurierEditBtns() {
+      dodajKurierBtn.style.display = 'none';
+      kurierBtnGroup.appendChild(zapiszKurierBtn);
+      kurierBtnGroup.appendChild(anulujKurierBtn);
+    }
+    function hideKurierEditBtns() {
+      dodajKurierBtn.style.display = '';
+      if (kurierBtnGroup.contains(zapiszKurierBtn)) kurierBtnGroup.removeChild(zapiszKurierBtn);
+      if (kurierBtnGroup.contains(anulujKurierBtn)) kurierBtnGroup.removeChild(anulujKurierBtn);
+    }
+
+    kurierzyTableBody.addEventListener('click', e => {
+      const id = parseInt(e.target.dataset.id);
+      if (e.target.classList.contains('edit')) {
+        const k = kurierzy.find(k => k.id === id);
+        if (k) {
+          nowyImie.value = k.imie;
+          nowyNazwisko.value = k.nazwisko;
+          noweGodziny.value = k.godzinyPracy;
+          noweWynagrodzenie.value = k.wynagrodzenie;
+          pojazdSelect.value = k.pojazdId || '';
+          edytowanyKurierId = id;
+          showKurierEditBtns();
+        }
+      } else if (e.target.classList.contains('delete')) {
+        if (confirm('Usunąć kuriera?')) {
+          kurierzy = kurierzy.filter(k => k.id !== id);
+          renderKurierzy();
+        }
+      }
+    });
+
+    zapiszKurierBtn.addEventListener('click', () => {
+      if (edytowanyKurierId !== null) {
+        const k = kurierzy.find(k => k.id === edytowanyKurierId);
+        if (k) {
+          k.imie = nowyImie.value.trim();
+          k.nazwisko = nowyNazwisko.value.trim();
+          k.godzinyPracy = noweGodziny.value.trim();
+          k.wynagrodzenie = parseFloat(noweWynagrodzenie.value);
+          k.pojazdId = pojazdSelect.value ? parseInt(pojazdSelect.value) : null;
+        }
+        edytowanyKurierId = null;
+        nowyImie.value = '';
+        nowyNazwisko.value = '';
+        noweGodziny.value = '';
+        noweWynagrodzenie.value = '';
+        pojazdSelect.value = '';
+        hideKurierEditBtns();
+        renderKurierzy();
+      }
+    });
+    anulujKurierBtn.addEventListener('click', () => {
+      edytowanyKurierId = null;
+      nowyImie.value = '';
+      nowyNazwisko.value = '';
+      noweGodziny.value = '';
+      noweWynagrodzenie.value = '';
+      pojazdSelect.value = '';
+      hideKurierEditBtns();
+    });
+
+    // --- EDYCJA POJAZDU W FORMULARZU ---
+    let edytowanyPojazdId = null;
+    const pojazdBtnDiv = document.querySelector('#dodajPojazdBtn').parentElement;
+    let pojazdBtnGroup = pojazdBtnDiv.querySelector('.button-group');
+    if (!pojazdBtnGroup) {
+      pojazdBtnGroup = document.createElement('div');
+      pojazdBtnGroup.className = 'button-group';
+      pojazdBtnDiv.appendChild(pojazdBtnGroup);
+    }
+    const zapiszPojazdBtn = document.createElement('button');
+    zapiszPojazdBtn.textContent = 'Zapisz zmiany';
+    zapiszPojazdBtn.type = 'button';
+    zapiszPojazdBtn.className = 'zapisz-pojazd';
+    const anulujPojazdBtn = document.createElement('button');
+    anulujPojazdBtn.textContent = 'Anuluj zmiany';
+    anulujPojazdBtn.type = 'button';
+    anulujPojazdBtn.className = 'anuluj-pojazd';
+
+    function showPojazdEditBtns() {
+      dodajPojazdBtn.style.display = 'none';
+      pojazdBtnGroup.appendChild(zapiszPojazdBtn);
+      pojazdBtnGroup.appendChild(anulujPojazdBtn);
+    }
+    function hidePojazdEditBtns() {
+      dodajPojazdBtn.style.display = '';
+      if (pojazdBtnGroup.contains(zapiszPojazdBtn)) pojazdBtnGroup.removeChild(zapiszPojazdBtn);
+      if (pojazdBtnGroup.contains(anulujPojazdBtn)) pojazdBtnGroup.removeChild(anulujPojazdBtn);
+    }
+
+    flotaTableBody.addEventListener('click', e => {
+      const id = parseInt(e.target.dataset.id);
+      if (e.target.classList.contains('edit')) {
+        const p = flota.find(p => p.id === id);
+        if (p) {
+          nowyNrRej.value = p.nrRej;
+          nowyTypPojazdu.value = p.typ;
+          nowaPojemnosc.value = p.pojemnosc;
+          edytowanyPojazdId = id;
+          showPojazdEditBtns();
+        }
+      } else if (e.target.classList.contains('delete')) {
+        if (confirm('Usunąć pojazd?')) {
+          const index = flota.findIndex(p => p.id === id);
+          if (index !== -1) flota.splice(index, 1);
+          kurierzy.forEach(k => { if (k.pojazdId === id) k.pojazdId = null; });
+          renderFlotaTable();
+          renderFlotaSelect();
+          renderKurierzy();
+        }
+      }
+    });
+
+    zapiszPojazdBtn.addEventListener('click', () => {
+      if (edytowanyPojazdId !== null) {
+        const p = flota.find(p => p.id === edytowanyPojazdId);
+        if (p) {
+          p.nrRej = nowyNrRej.value.trim();
+          p.typ = nowyTypPojazdu.value.trim();
+          p.pojemnosc = parseFloat(nowaPojemnosc.value);
+        }
+        edytowanyPojazdId = null;
+        nowyNrRej.value = '';
+        nowyTypPojazdu.value = '';
+        nowaPojemnosc.value = '';
+        hidePojazdEditBtns();
+        renderFlotaTable();
+        renderFlotaSelect();
+        renderKurierzy();
+      }
+    });
+    anulujPojazdBtn.addEventListener('click', () => {
+      edytowanyPojazdId = null;
+      nowyNrRej.value = '';
+      nowyTypPojazdu.value = '';
+      nowaPojemnosc.value = '';
+      hidePojazdEditBtns();
+    });
+    init();
+
+    oddzialSelect.addEventListener("change", () => {
+      renderKurierzy();
+      flotaSection.style.display = "block";
+    });
+  </script>
+
+</body>
+
+</html>

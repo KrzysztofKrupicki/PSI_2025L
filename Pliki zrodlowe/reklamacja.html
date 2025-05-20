@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System Firmy kurierskiej</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-sizing: border-box;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      padding: 0.6rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-direction: row;
+    }
+
+    .button-group button {
+      flex: 1;
+      font-size: 1rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      background-color: #007bff;
+      color: white;
+    }
+
+    .button-group button:hover {
+      background-color: #0056b3;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    Złóż reklamację
+  </header>
+  <div class="container">
+    <label for="numerPrzesylki">Wybierz przesyłkę</label>
+    <select id="numerPrzesylki" required>
+      <option value="">-- wybierz przesyłkę --</option>
+      <option value="PK123456">PK123456</option>
+      <option value="PK987654">PK987654</option>
+      <option value="PK654321">PK654321</option>
+    </select>
+
+    <label for="powodReklamacji">Opis powodu reklamacji</label>
+    <textarea id="powodReklamacji" placeholder="Opisz problem..." required></textarea>
+
+    <div class="button-group">
+      <button id="btnZlozReklamacje">Złóż reklamację</button>
+      <button id="btnWroc" type="button">Wróć</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('btnZlozReklamacje').addEventListener('click', () => {
+      const numer = document.getElementById('numerPrzesylki').value;
+      const powod = document.getElementById('powodReklamacji').value.trim();
+
+      if (!numer) {
+        alert('Wybierz przesyłkę.');
+        return;
+      }
+      if (!powod) {
+        alert('Opisz powód reklamacji.');
+        return;
+      }
+
+      alert(`Reklamacja dla przesyłki ${numer} została złożona.\n\nOpis: ${powod}`);
+    });
+
+    document.getElementById('btnWroc').addEventListener('click', () => {
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+
+</html>

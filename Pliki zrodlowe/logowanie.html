@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System Firmy kurierskiej</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      width: 380px;
+      max-width: 95vw;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      padding: 30px 25px 40px 25px;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      margin: 0 0 20px;
+      text-align: center;
+      color: #007bff;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+      user-select: none;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 14px 0;
+      cursor: pointer;
+      font-weight: 700;
+      color: #666;
+      border-bottom: 3px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .tab.active {
+      color: #007bff;
+      border-color: #007bff;
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+    }
+
+    form.active {
+      display: flex;
+    }
+
+    label {
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"] {
+      padding: 14px 12px;
+      margin-bottom: 18px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    input[type="tel"]:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    button {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .info {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 14px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .info a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Checkbox styl */
+    label.checkbox-label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    label.checkbox-label input[type="checkbox"] {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px 20px 30px 20px;
+        width: 100%;
+        border-radius: 0;
+        min-height: 100vh;
+        box-shadow: none;
+        justify-content: flex-start;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+      }
+
+      .tab {
+        font-size: 1rem;
+        padding: 12px 0;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="tel"] {
+        padding: 12px 10px;
+        font-size: 1rem;
+        margin-bottom: 16px;
+      }
+
+      button {
+        padding: 14px;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="tabs" role="tablist">
+      <div class="tab active" data-target="login" role="tab" aria-selected="true" tabindex="0">Logowanie</div>
+      <div class="tab" data-target="register-step1" role="tab" aria-selected="false" tabindex="-1">Rejestracja</div>
+      <div class="tab" data-target="reset" role="tab" aria-selected="false" tabindex="-1">Reset hasła</div>
+    </div>
+
+    <!-- Logowanie -->
+    <form id="login" class="active" role="tabpanel" aria-labelledby="login-tab">
+      <h2>Logowanie</h2>
+      <label for="login-email">E-mail</label>
+      <input type="email" id="login-email" placeholder="email@example.com" required autocomplete="username" />
+      <label for="login-password">Hasło</label>
+      <input type="password" id="login-password" placeholder="Hasło" required autocomplete="current-password" />
+      <label class="checkbox-label"><input type="checkbox" id="remember-me" /> Pamiętaj mnie</label>
+      <button type="submit">Zaloguj się</button>
+      <div class="info">
+        Nie masz konta? <a href="#" onclick="showTab('register-step1'); return false;">Załóż je!</a><br />
+        <a href="#" onclick="showTab('reset'); return false;">Zapomniałeś hasła?</a>
+      </div>
+    </form>
+
+    <!-- Rejestracja krok 1 -->
+    <form id="register-step1" role="tabpanel" aria-labelledby="register-step1-tab">
+      <h2>Rejestracja - krok 1/2</h2>
+      <label for="reg-email">E-mail:</label>
+      <input type="email" id="reg-email" placeholder="email@example.com" required autocomplete="email" />
+      <label for="reg-password">Hasło:</label>
+      <input type="password" id="reg-password" placeholder="Hasło" required autocomplete="new-password" />
+      <label for="reg-password2">Powtórz hasło:</label>
+      <input type="password" id="reg-password2" placeholder="Powtórz hasło" required autocomplete="new-password" />
+      <button type="submit">Dalej</button>
+      <div class="info">
+        Masz już konto? <a href="#" onclick="showTab('login'); return false;">Zaloguj się!</a>
+      </div>
+    </form>
+
+    <!-- Rejestracja krok 2 -->
+    <form id="register-step2" role="tabpanel" aria-labelledby="register-step2-tab">
+      <h2>Rejestracja - krok 2/2</h2>
+      <label for="reg-imie">Imię:</label>
+      <input type="text" id="reg-imie" placeholder="Imię" required autocomplete="given-name" />
+      <label for="reg-nazwisko">Nazwisko:</label>
+      <input type="text" id="reg-nazwisko" placeholder="Nazwisko" required autocomplete="family-name" />
+      <label for="reg-telefon">Telefon:</label>
+      <input type="tel" id="reg-telefon" placeholder="Numer telefonu" required autocomplete="tel" />
+      <label for="reg-miasto">Miasto:</label>
+      <input type="text" id="reg-miasto" placeholder="Miasto" required autocomplete="address-level2" />
+      <label for="reg-ulica">Ulica:</label>
+      <input type="text" id="reg-ulica" placeholder="Ulica" required autocomplete="address-line1" />
+      <label for="reg-nrdomu">Nr domu:</label>
+      <input type="text" id="reg-nrdomu" placeholder="Nr domu" required autocomplete="address-line2" />
+      <label for="reg-nrlokalu">Nr lokalu (opcjonalnie):</label>
+      <input type="text" id="reg-nrlokalu" placeholder="Nr lokalu" autocomplete="address-line3" />
+      <label for="reg-kodpocztowy">Kod pocztowy:</label>
+      <input type="text" id="reg-kodpocztowy" placeholder="Kod pocztowy" required autocomplete="postal-code" />
+      <button type="submit">Zarejestruj się</button>
+    </form>
+
+    <!-- Reset hasła -->
+    <form id="reset" role="tabpanel" aria-labelledby="reset-tab">
+      <h2>Reset hasła</h2>
+      <label for="reset-email">Podaj e-mail do resetu hasła</label>
+      <input type="email" id="reset-email" placeholder="email@example.com" required autocomplete="email" />
+      <button type="submit">Wyślij instrukcję resetu</button>
+      <div class="info">
+        Pamiętasz hasło? <a href="#" onclick="showTab('login'); return false;">Zaloguj się!</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const forms = document.querySelectorAll('form');
+    const registerStep1 = document.getElementById('register-step1');
+    const registerStep2 = document.getElementById('register-step2');
+
+    function showTab(name) {
+      tabs.forEach(t => {
+        t.classList.toggle('active', t.dataset.target === name);
+        t.setAttribute('aria-selected', t.dataset.target === name);
+        t.tabIndex = (t.dataset.target === name) ? 0 : -1;
+      });
+      forms.forEach(f => {
+        f.classList.toggle('active', f.id === name);
+        f.setAttribute('aria-hidden', f.id !== name);
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        showTab(tab.dataset.target);
+      });
+    });
+
+    registerStep1.addEventListener('submit', e => {
+      e.preventDefault();
+      const pass1 = document.getElementById('reg-password').value;
+      const pass2 = document.getElementById('reg-password2').value;
+      if (pass1 !== pass2) {
+        alert('Hasła muszą być takie same!');
+        return;
+      }
+      showTab('register-step2');
+    });
+
+    registerStep2.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Rejestracja zakończona sukcesem! Możesz się zalogować.');
+      showTab('login');
+    });
+
+    document.getElementById('login').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Zalogowano pomyślnie!');
+    });
+
+    document.getElementById('reset').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Wysłano instrukcję resetu hasła na podany e-mail.');
+    });
+  </script>
+
+</body>
+
+</html>

@@ -32,3 +32,6 @@ https://enzomind.com/files/uwm/wyklady/PSI/cw05_2_Modelowanie_struktury_diagram_
 CW8 i CW9
 https://enzomind.com/files/uwm/wyklady/PSI/cw06_1_Projektowanie_danych/cw06_1_DKaRBD.pdf
 https://enzomind.com/files/uwm/wyklady/PSI/cw06_1_Projektowanie_danych/cw06_2_RBD_normalizacja.pdf
+
+CW10 i CW11
+https://enzomind.com/files/uwm/wyklady/PSI/cw08_Projektowanie_Interfejsu_uzytkownika/cw08_Projektowanie_UI.pdf
