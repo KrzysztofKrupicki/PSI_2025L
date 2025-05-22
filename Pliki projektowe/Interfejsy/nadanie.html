@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Firmy kurierskiej</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-sizing: border-box;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      margin-top: 0rem;
+      text-align: center;
+    }
+
+    fieldset {
+      border: 1px solid #ccc;
+      padding: 0.5rem 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: 8px;
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 1.05rem;
+      padding: 0 6px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.75rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 1rem;
+    }
+
+    input,
+    select {
+      padding: 0.5rem 0.6rem;
+      font-size: 0.95rem;
+      margin-top: 0.25rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    button {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 0.5rem 0.5rem 0.5rem 0;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .button-group button {
+      flex: 1;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    Panel użytkownika - Nadanie przesyłki
+  </header>
+  <div class="container">
+    <h2>Nadanie przesyłki</h2>
+    <form id="nadanieForm">
+      <fieldset>
+        <legend>Typ nadania</legend>
+        <label><input type="radio" name="typNadania" value="automat" checked /> Z automatu do automatu</label>
+        <label><input type="radio" name="typNadania" value="adres" /> Z automatu pod adres</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Dane nadawcy</legend>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="nadawcaImie">Imię</label>
+            <input type="text" id="nadawcaImie" required />
+          </div>
+          <div class="form-field">
+            <label for="nadawcaNazwisko">Nazwisko</label>
+            <input type="text" id="nadawcaNazwisko" required />
+          </div>
+          <div class="form-field">
+            <label for="nadawcaEmail">E-mail</label>
+            <input type="text" id="nadawcaEmail" required />
+          </div>
+          <div class="form-field">
+            <label for="nadawcaTelefon">Telefon</label>
+            <input type="tel" id="nadawcaTelefon" required />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Dane odbiorcy</legend>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="odbiorcaImie">Imię</label>
+            <input type="text" id="odbiorcaImie" required />
+          </div>
+          <div class="form-field">
+            <label for="odbiorcaNazwisko">Nazwisko</label>
+            <input type="text" id="odbiorcaNazwisko" required />
+          </div>
+          <div class="form-field">
+            <label for="odbiorcaEmail">E-mail</label>
+            <input type="text" id="odbiorcaEmail" required />
+          </div>
+          <div class="form-field">
+            <label for="odbiorcaTelefon">Telefon</label>
+            <input type="tel" id="odbiorcaTelefon" required />
+          </div>
+        </div>
+      </fieldset>
+
+      <div id="automatFields" style="display: none;">
+        <fieldset>
+          <legend>Automat przesyłkowy</legend>
+          <div class="form-field">
+            <label for="miastoAutomatu">Miasto</label>
+            <input type="text" id="miastoAutomatu" placeholder="Np. Warszawa" />
+          </div>
+          <div class="form-field">
+            <label for="automatOdbiorczy">Wybierz automat</label>
+            <select id="automatOdbiorczy">
+              <option value="">Wybierz automat</option>
+              <option value="A123">Automat A123 – Warszawa, ul. Testowa 1</option>
+              <option value="B456">Automat B456 – Warszawa, ul. Nowa 5</option>
+            </select>
+          </div>
+      </div>
+      </fieldset>
+
+      <div id="adresFields">
+
+        <fieldset>
+          <legend>Adres odbiorcy</legend>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="miasto">Miasto</label>
+              <input type="text" id="miasto" />
+            </div>
+            <div class="form-field">
+              <label for="kodPocztowy">Kod pocztowy</label>
+              <input type="text" id="kodPocztowy" />
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="ulica">Ulica</label>
+              <input type="text" id="ulica" />
+            </div>
+            <div class="form-field">
+              <label for="nrDomu">Nr domu</label>
+              <input type="text" id="nrDomu" />
+            </div>
+            <div class="form-field">
+              <label for="nrLokalu">Nr lokalu (opcjonalnie)</label>
+              <input type="text" id="nrLokalu" />
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+      <fieldset>
+        <legend>Dane przesyłki</legend>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="gabaryt">Gabaryt przesyłki (max 25 kg)</label>
+            <select id="gabaryt" required>
+              <option value="">Wybierz gabaryt</option>
+              <option value="S">Mały (8x38x64 cm) – 17,99 zł</option>
+              <option value="M">Średni (18x38x64 cm) – 19,99 zł</option>
+              <option value="L">Duży (41x38x64 cm) – 21,99 zł</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="metodaPlatnosci">Metoda płatności</label>
+            <select id="metodaPlatnosci" required>
+              <option value="">Wybierz metodę</option>
+              <option value="blik">BLIK</option>
+              <option value="karta">Karta płatnicza</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+
+      <div class="button-group">
+        <button id="btnNadaj">Nadaj przesyłkę i zapłać</button>
+        <button id="btnWroc" onclick="window.location.href='dashboard.html'" type="button">Wróć</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const adresFields = document.getElementById('adresFields');
+    const automatFields = document.getElementById('automatFields');
+
+    function toggleOdbiorcaFields() {
+      const typ = document.querySelector('input[name="typNadania"]:checked').value;
+
+      if (typ === "adres") {
+        adresFields.style.display = "block";
+        automatFields.style.display = "none";
+        [...adresFields.querySelectorAll('input')].forEach(input => input.required = true);
+        [...automatFields.querySelectorAll('input, select')].forEach(input => input.required = false);
+      } else {
+        adresFields.style.display = "none";
+        automatFields.style.display = "block";
+        [...adresFields.querySelectorAll('input')].forEach(input => input.required = false);
+        [...automatFields.querySelectorAll('input, select')].forEach(input => input.required = true);
+      }
+    }
+
+    document.querySelectorAll('input[name="typNadania"]').forEach(el =>
+      el.addEventListener('change', toggleOdbiorcaFields)
+    );
+
+    toggleOdbiorcaFields();
+  </script>
+</body>
+
+</html>

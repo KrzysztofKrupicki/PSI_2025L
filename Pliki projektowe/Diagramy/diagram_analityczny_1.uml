@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+
+actor Klient
+actor Kurier
+actor OperatorSystemu as "Operator Systemu"
+actor PracownikObslugiKlienta as "Pracownik Obsługi Klienta"
+actor "Nowy Użytkownik" as NowyUzytkownik
+actor Uzytkownik
+
+package "UC02: Zaloguj się" {
+  boundary PanelLogowania as "Panel logowania"
+  control UC01_WeryfikacjaDanych as "Weryfikacja danych"
+  entity UC01_Uzytkownik as "Użytkownik"
+  entity UC01_Rola as "Rola"
+  
+  Uzytkownik --> PanelLogowania
+  Klient --|> Uzytkownik
+  Kurier --|> Uzytkownik
+  OperatorSystemu --|> Uzytkownik
+  PracownikObslugiKlienta --|> Uzytkownik
+
+  PanelLogowania -- UC01_WeryfikacjaDanych
+  UC01_WeryfikacjaDanych -- UC01_Uzytkownik
+  UC01_Uzytkownik .. UC01_Rola
+}
+
+package "UC01: Zarejestruj konto" {
+  boundary PanelRejestracji as "Panel rejestracji"
+  control UC02_WeryfikacjaDanych as "Weryfikacja danych"
+  entity UC02_Uzytkownik as "Użytkownik"
+
+  NowyUzytkownik --> PanelRejestracji
+  PanelRejestracji -- UC02_WeryfikacjaDanych
+  UC02_WeryfikacjaDanych -- UC02_Uzytkownik
+}
+
+package "UC03: Resetuj hasło" {
+  boundary PanelResetujHaslo as "Panel resetu hasła"
+  control UC03_WeryfikacjaDanych as "Weryfikacja danych"
+
+  Uzytkownik --> PanelResetujHaslo
+  PanelResetujHaslo -- UC03_WeryfikacjaDanych
+}
+@enduml

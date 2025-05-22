@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System Firmy kurierskiej</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 20px 25px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input,
+    button {
+      width: 100%;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    Odbiór przesyłki
+  </header>
+  <div class="container">
+    <label for="numerTelefonu">Numer telefonu</label>
+    <input type="text" id="numerTelefonu" placeholder="Wpisz numer telefonu" />
+    <label for="kodOdbioru">Kod odbioru</label>
+    <input type="text" id="kodOdbioru" placeholder="Wpisz kod odbioru" />
+    <button id="btnSledz">Odbierz</button>
+    <button type="reset">Anuluj</button>
+  </div>
+
+
+</body>
+
+</html>

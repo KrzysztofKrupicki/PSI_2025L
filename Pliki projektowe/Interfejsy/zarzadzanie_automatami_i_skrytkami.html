@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System Firmy kurierskiej</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 20px 25px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    select,
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.3rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      flex: 1;
+      box-sizing: border-box;
+    }
+
+    button {
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+      transition: background 0.3s;
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.3rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      flex: 1;
+      box-sizing: border-box;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f0f0;
+    }
+
+    .toggle-switch {
+      cursor: pointer;
+    }
+
+    .progress-bar-container {
+      background: #e9ecef;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background-color: #007bff;
+      width: 0;
+      color: white;
+      text-align: center;
+      line-height: 20px;
+      transition: width 0.3s;
+    }
+
+    .actions button.delete {
+      background: #dc3545;
+      margin-left: 5px;
+    }
+
+    .actions button.delete:hover {
+      background: #a71d2a;
+    }
+
+    .form-row {
+      display: flex;
+    }
+
+    .form-row>div {
+      flex: 1;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        flex-direction: column;
+      }
+    }
+
+    .back-btn {
+      margin-top: 1rem;
+    }
+
+    .back-btn:hover {
+      background: #5a6268;
+    }
+
+    h3 {
+      margin-bottom: 0rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    Zarządzanie automatami i skrytkami
+  </header>
+
+  <div class="container">
+    <label for="miastoInput">Miasto</label>
+    <input type="text" id="miastoInput" placeholder="Wpisz miasto" />
+    <button id="szukajBtn">Szukaj automatów</button>
+
+    <label for="automatSelect">Automaty w mieście</label>
+    <select id="automatSelect" disabled>
+      <option value="">Wybierz automat</option>
+    </select>
+
+    <div id="automatDetails" style="display:none;">
+      <h2>Szczegóły automatu</h2>
+      <p><strong>Nazwa:</strong> <span id="automatNazwa"></span></p>
+      <p><strong>Adres:</strong> <span id="automatAdres"></span></p>
+      <p><strong>Kod automatu:</strong> <span id="automatKod"></span></p>
+      <label>
+        <input type="checkbox" id="automatStatus" /> Automat aktywny
+      </label>
+
+      <h3>Skrytki</h3>
+      <table id="skrytkiTable">
+        <thead>
+          <tr>
+            <th>Kod skrytki</th>
+            <th>Gabaryt</th>
+            <th>Status</th>
+            <th>Aktywna</th>
+            <th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="progress-bar-container" title="Procent zajętości skrytek">
+        <div class="progress-bar" id="progressBar">0%</div>
+      </div>
+
+      <h3>Dodaj nową skrytkę</h3>
+      <div class="form-row">
+        <div>
+          <label for="nowyKodSkrytki">Kod skrytki</label>
+          <input type="text" id="nowyKodSkrytki" placeholder="np. A01" />
+        </div>
+        <div>
+          <label for="nowyGabaryt">Gabaryt</label>
+          <select id="nowyGabaryt">
+            <option value="">Wybierz gabaryt</option>
+            <option value="Mały">Mały</option>
+            <option value="Średni">Średni</option>
+            <option value="Duży">Duży</option>
+          </select>
+        </div>
+        <div style="display:flex; align-items:flex-end;">
+          <button id="dodajSkrytkeBtn">Dodaj skrytkę</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='dashboard.html'">Wróć</button>
+  </div>
+
+  <script>
+    // Demo dane - w praktyce będą pobierane z backendu
+    const automaty = [
+      {
+        id: 1,
+        nazwa: "Automat Warszawa Testowa",
+        miasto: "Warszawa",
+        ulica: "Testowa",
+        nrBudynku: "1",
+        kodPocztowy: "00-001",
+        kodAutomatu: "A123",
+        aktywny: true,
+        skrytki: [
+          { kod: "A01", gabaryt: "Mały", zajeta: false, aktywna: true },
+          { kod: "A02", gabaryt: "Średni", zajeta: true, aktywna: true },
+          { kod: "A03", gabaryt: "Duży", zajeta: false, aktywna: true }
+        ]
+      },
+      {
+        id: 2,
+        nazwa: "Automat Warszawa Nowa",
+        miasto: "Warszawa",
+        ulica: "Nowa",
+        nrBudynku: "5",
+        kodPocztowy: "00-002",
+        kodAutomatu: "B456",
+        aktywny: false,
+        skrytki: [
+          { kod: "B01", gabaryt: "Mały", zajeta: true, aktywna: false },
+          { kod: "B02", gabaryt: "Średni", zajeta: true, aktywna: true }
+        ]
+      }
+    ];
+
+    const miastoInput = document.getElementById("miastoInput");
+    const szukajBtn = document.getElementById("szukajBtn");
+    const automatSelect = document.getElementById("automatSelect");
+    const automatDetails = document.getElementById("automatDetails");
+    const automatNazwa = document.getElementById("automatNazwa");
+    const automatAdres = document.getElementById("automatAdres");
+    const automatKod = document.getElementById("automatKod");
+    const automatStatus = document.getElementById("automatStatus");
+    const skrytkiTableBody = document.querySelector("#skrytkiTable tbody");
+    const progressBar = document.getElementById("progressBar");
+    const nowyKodSkrytki = document.getElementById("nowyKodSkrytki");
+    const nowyGabaryt = document.getElementById("nowyGabaryt");
+    const dodajSkrytkeBtn = document.getElementById("dodajSkrytkeBtn");
+
+    let wybranyAutomat = null;
+
+    function pokazAutomaty() {
+      const miasto = miastoInput.value.trim().toLowerCase();
+      automatSelect.innerHTML = '<option value="">Wybierz automat</option>';
+
+      if (!miasto) {
+        automatSelect.disabled = true;
+        automatDetails.style.display = "none";
+        return;
+      }
+
+      const filtrowane = automaty.filter(a => a.miasto.toLowerCase() === miasto);
+
+      if (filtrowane.length === 0) {
+        automatSelect.disabled = true;
+        automatDetails.style.display = "none";
+        alert("Brak automatów w tym mieście.");
+        return;
+      }
+
+      filtrowane.forEach(a => {
+        const option = document.createElement("option");
+        option.value = a.id;
+        option.textContent = `${a.nazwa} (${a.ulica} ${a.nrBudynku})`;
+        automatSelect.appendChild(option);
+      });
+      automatSelect.disabled = false;
+      automatDetails.style.display = "none";
+    }
+
+    function pokazSzczegolyAutomatu() {
+      const automatId = parseInt(automatSelect.value);
+      if (!automatId) {
+        automatDetails.style.display = "none";
+        return;
+      }
+      wybranyAutomat = automaty.find(a => a.id === automatId);
+
+      automatNazwa.textContent = wybranyAutomat.nazwa;
+      automatAdres.textContent = `${wybranyAutomat.miasto}, ul. ${wybranyAutomat.ulica} ${wybranyAutomat.nrBudynku}, ${wybranyAutomat.kodPocztowy}`;
+      automatKod.textContent = wybranyAutomat.kodAutomatu;
+      automatStatus.checked = wybranyAutomat.aktywny;
+
+      renderSkrytki();
+      automatDetails.style.display = "block";
+    }
+
+    function renderSkrytki() {
+      skrytkiTableBody.innerHTML = "";
+      wybranyAutomat.skrytki.forEach((skrytka, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+        <td>${skrytka.kod}</td>
+        <td>${skrytka.gabaryt}</td>
+        <td>${skrytka.zajeta ? "Zajęta" : "Wolna"}</td>
+        <td><input type="checkbox" class="aktywnoscSkrytki" data-index="${index}" ${skrytka.aktywna ? "checked" : ""} /></td>
+        <td class="actions">
+          <button class="delete" data-index="${index}">Usuń</button>
+        </td>
+      `;
+        skrytkiTableBody.appendChild(tr);
+      });
+      aktualizujProcentZajetosci();
+    }
+
+    function aktualizujProcentZajetosci() {
+      const aktywneSkrytki = wybranyAutomat.skrytki.filter(s => s.aktywna).length;
+      const zajeteSkrytki = wybranyAutomat.skrytki.filter(s => s.aktywna && s.zajeta).length;
+      const procent = aktywneSkrytki === 0 ? 0 : Math.round((zajeteSkrytki / aktywneSkrytki) * 100);
+      progressBar.style.width = procent + "%";
+      progressBar.textContent = procent + "%";
+    }
+
+    // Eventy
+    szukajBtn.addEventListener("click", pokazAutomaty);
+    automatSelect.addEventListener("change", pokazSzczegolyAutomatu);
+
+    automatStatus.addEventListener("change", () => {
+      if (!wybranyAutomat) return;
+      wybranyAutomat.aktywny = automatStatus.checked;
+      alert(`Automat ${wybranyAutomat.aktywny ? "aktywowany" : "dezaktywowany"}`);
+    });
+
+    skrytkiTableBody.addEventListener("change", e => {
+      if (e.target.classList.contains("aktywnoscSkrytki")) {
+        const index = e.target.dataset.index;
+        wybranyAutomat.skrytki[index].aktywna = e.target.checked;
+        aktualizujProcentZajetosci();
+      }
+    });
+
+    skrytkiTableBody.addEventListener("click", e => {
+      if (e.target.classList.contains("delete")) {
+        const index = e.target.dataset.index;
+        if (confirm(`Usunąć skrytkę ${wybranyAutomat.skrytki[index].kod}?`)) {
+          wybranyAutomat.skrytki.splice(index, 1);
+          renderSkrytki();
+        }
+      }
+    });
+
+    dodajSkrytkeBtn.addEventListener("click", () => {
+      const kod = nowyKodSkrytki.value.trim();
+      const gabaryt = nowyGabaryt.value;
+
+      if (!kod) {
+        alert("Proszę podać kod skrytki.");
+        return;
+      }
+      if (!gabaryt) {
+        alert("Proszę wybrać gabaryt.");
+        return;
+      }
+      if (!wybranyAutomat) {
+        alert("Proszę wybrać automat.");
+        return;
+      }
+      if (wybranyAutomat.skrytki.some(s => s.kod === kod)) {
+        alert("Kod skrytki musi być unikalny.");
+        return;
+      }
+
+      wybranyAutomat.skrytki.push({
+        kod: kod,
+        gabaryt: gabaryt,
+        zajeta: false,
+        aktywna: true
+      });
+
+      renderSkrytki();
+
+      nowyKodSkrytki.value = "";
+      nowyGabaryt.value = "";
+    });
+  </script>
+
+</body>
+
+</html>

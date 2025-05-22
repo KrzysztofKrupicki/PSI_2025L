@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System Firmy kurierskiej</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 20px 25px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 0.6rem;
+      text-align: left;
+    }
+
+    th {
+      background: #e9ecef;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    button.delete {
+      background: #dc3545;
+    }
+
+    button.delete:hover {
+      background: #a71d2a;
+    }
+
+    form {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.45rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .form-buttons {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      min-width: 120px;
+      height: 40px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    #saveBtn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    #saveBtn:hover {
+      background-color: #218838;
+    }
+
+    #cancelBtn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    #cancelBtn:hover {
+      background-color: #c82333;
+    }
+
+    .edit-btn {
+      background-color: #ffc107;
+      color: #222;
+    }
+
+    .edit-btn:hover {
+      background-color: #e0a800;
+      color: #222;
+    }
+
+    .back-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+
+    button.delete {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    button.delete:hover {
+      background-color: #a71d2a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    Panel operatora – Zarządzanie użytkownikami
+  </header>
+
+  <div class="container">
+
+    <h2>Lista użytkowników</h2>
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Imię</th>
+          <th>Nazwisko</th>
+          <th>E-mail</th>
+          <th>Telefon</th>
+          <th>Rola</th>
+          <th>Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <h2 id="formTitle">Dodaj nowego użytkownika</h2>
+    <form id="userForm">
+      <input type="hidden" id="userId" />
+      <div>
+        <label for="imie">Imię</label>
+        <input type="text" id="imie" required />
+      </div>
+      <div>
+        <label for="nazwisko">Nazwisko</label>
+        <input type="text" id="nazwisko" required />
+      </div>
+      <div>
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required />
+      </div>
+      <div>
+        <label for="telefon">Telefon</label>
+        <input type="tel" id="telefon" />
+      </div>
+      <div>
+        <label for="rola">Rola</label>
+        <select id="rola" required>
+          <option value="">Wybierz rolę</option>
+          <option value="klient">Klient</option>
+          <option value="kurier">Kurier</option>
+          <option value="pracownik">Pracownik obsługi klienta</option>
+          <option value="operator">Operator systemu</option>
+        </select>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" id="saveBtn">Dodaj użytkownika</button>
+        <button type="button" id="cancelBtn" style="display:none;">Anuluj edycję</button>
+        <button type="button" onclick="window.location.href='dashboard.html'" id="backBtn"
+          class="back-btn">Wróć</button>
+      </div>
+
+  </div>
+
+  <script>
+    let users = [
+      { id: 1, imie: "Jan", nazwisko: "Kowalski", email: "jan.kowalski@example.com", telefon: "123456789", rola: "klient" },
+      { id: 2, imie: "Maria", nazwisko: "Nowak", email: "maria.nowak@example.com", telefon: "987654321", rola: "kurier" },
+      { id: 3, imie: "Operator", nazwisko: "Systemu", email: "operator@example.com", telefon: "555123456", rola: "operator" },
+    ];
+
+    const userTableBody = document.querySelector("#userTable tbody");
+    const form = document.getElementById("userForm");
+    const formTitle = document.getElementById("formTitle");
+    const saveBtn = document.getElementById("saveBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    function renderUsers() {
+      userTableBody.innerHTML = "";
+      users.forEach(user => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+        <td>${user.id}</td>
+        <td>${user.imie}</td>
+        <td>${user.nazwisko}</td>
+        <td>${user.email}</td>
+        <td>${user.telefon || ""}</td>
+        <td>${user.rola}</td>
+        <td>
+          <button class="edit-btn" onclick="editUser(${user.id})">Edytuj</button>
+          <button class="delete" onclick="deleteUser(${user.id})">Usuń</button>
+        </td>
+      `;
+        userTableBody.appendChild(tr);
+      });
+    }
+
+    function resetForm() {
+      formTitle.textContent = "Dodaj nowego użytkownika";
+      form.reset();
+      document.getElementById("userId").value = "";
+      saveBtn.textContent = "Dodaj użytkownika";
+      cancelBtn.style.display = "none";
+      backBtn.style.display = "inline-block";
+    }
+
+    function editUser(id) {
+      const user = users.find(u => u.id === id);
+      if (!user) return;
+      document.getElementById("userId").value = user.id;
+      document.getElementById("imie").value = user.imie;
+      document.getElementById("nazwisko").value = user.nazwisko;
+      document.getElementById("email").value = user.email;
+      document.getElementById("telefon").value = user.telefon;
+      document.getElementById("rola").value = user.rola;
+      formTitle.textContent = "Edytuj użytkownika";
+      saveBtn.textContent = "Zapisz zmiany";
+      cancelBtn.style.display = "inline-block";
+      backBtn.style.display = "block";
+    }
+
+    function deleteUser(id) {
+      if (confirm("Czy na pewno chcesz usunąć tego użytkownika?")) {
+        users = users.filter(u => u.id !== id);
+        renderUsers();
+        resetForm();
+      }
+    }
+
+    cancelBtn.addEventListener("click", resetForm);
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const id = document.getElementById("userId").value;
+      const imie = document.getElementById("imie").value.trim();
+      const nazwisko = document.getElementById("nazwisko").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const telefon = document.getElementById("telefon").value.trim();
+      const rola = document.getElementById("rola").value;
+
+      if (!imie || !nazwisko || !email || !rola) {
+        alert("Proszę wypełnić wszystkie wymagane pola.");
+        return;
+      }
+
+      if (id) {
+        const user = users.find(u => u.id == id);
+        if (user) {
+          user.imie = imie;
+          user.nazwisko = nazwisko;
+          user.email = email;
+          user.telefon = telefon;
+          user.rola = rola;
+        }
+      } else {
+        const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+        users.push({ id: newId, imie, nazwisko, email, telefon, rola });
+      }
+      renderUsers();
+      resetForm();
+    });
+
+    renderUsers();
+  </script>
+</body>
+
+</html>
