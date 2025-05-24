@@ -1,0 +1,27 @@
+@startuml
+start
+
+:Kurier odbiera przesy³ki z oddzia³u lub sortowni;
+:Kurier przegl¹da listê przesy³ek do dostarczenia;
+
+repeat
+    :Kurier dostarcza przesy³kê do klienta lub automatu;
+
+    if (Automat pe³ny?) then (tak)
+        :Dostarcz do najbli¿szego automatu lub zwróæ do magazynu;
+        :Aktualizuj status przesy³ki;
+    else (nie)
+        if (Klient obecny?) then (tak)
+            :Klient odbiera przesy³kê, podaj¹c kod odbioru;
+            :System zmienia status przesy³ki na "Dostarczona";
+            :Zapisz historiê operacji;
+        else (nie)
+            :Zwróæ przesy³kê do oddzia³u;
+            :Aktualizuj status przesy³ki;
+        endif
+    endif
+
+repeat while (S¹ kolejne przesy³ki do dostarczenia?)
+
+stop
+@enduml

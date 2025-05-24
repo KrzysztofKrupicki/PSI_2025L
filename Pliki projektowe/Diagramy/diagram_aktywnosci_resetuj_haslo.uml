@@ -1,0 +1,28 @@
+@startuml
+start
+
+:U¿ytkownik wybiera "Nie pamiêtam has³a";
+:System wyœwietla formularz z polem e-mail;
+
+:U¿ytkownik wpisuje e-mail;
+
+if (E-mail istnieje w bazie?) then (tak)
+  :System wysy³a wiadomoœæ z linkiem do zmiany has³a;
+  :U¿ytkownik klika w link;
+  
+  if (Link aktywny?) then (tak)
+    :System wyœwietla formularz resetu has³a;
+    :U¿ytkownik ustawia nowe has³o;
+    :System zapisuje nowe has³o i potwierdza operacjê;
+    :U¿ytkownik mo¿e siê zalogowaæ nowym has³em;
+  else (nie)
+    :System wyœwietla komunikat o wygas³ym linku;
+    :System umo¿liwia ponowne wygenerowanie linku;
+  endif
+
+else (nie)
+  :System wyœwietla komunikat, ¿e brak konta z podanym e-mailem;
+endif
+
+stop
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+start
+
+:Operator otwiera moduł zarządzania automatami;
+:Operator wyszukuje automat według miasta;
+:Operator wybiera automat z listy;
+    :Operator wybiera operację;
+    switch (Typ operacji?)
+        case (Wyłącz automat)
+            :System wyłącza automat z użytku;
+        case (Dodaj nowe skrytki)
+            :Operator wprowadza dane nowych skrytek;
+            if (Dane kompletne?) then (tak)
+                :System dodaje skrytki;
+            else (nie)
+                :System informuje o brakach;
+                stop
+            endif
+        case (Usuń skrytki)
+            :Operator usuwa wybrane skrytki;
+        case (Zmień status skrytek)
+            :Operator zmienia status wybranych skrytek;
+    endswitch
+
+:System zapisuje zmiany;
+stop
+@enduml

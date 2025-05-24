@@ -1,0 +1,20 @@
+@startuml
+
+start
+
+:Klient wybiera opcjê "Nadaj przesy³kê";
+:Klient wybiera typ nadania;
+:Klient wype³nia dane nadawcy i odbiorcy;
+:Klient wybiera gabaryt i metodê p³atnoœci;
+
+repeat
+  :Klient dokonuje p³atnoœci;
+    backward:System informuje o nieudanej p³atnoœci;
+repeat while (P³atnoœæ powiod³a siê?) is (nie)
+
+:Klient przekazuje przesy³kê kurierowi lub do automatu;
+:System zmienia status przesy³ki na "Nadana";
+
+stop
+
+@enduml

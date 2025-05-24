@@ -1,0 +1,23 @@
+@startuml
+start
+
+:Klient otrzymuje powiadomienie o gotowości przesyłki do odbioru;
+:Klient wprowadza kod odbioru (automat lub kurier);
+
+if (Automat niesprawny?) then (tak)
+  :Klient proszony o kontakt z obsługą klienta lub kurierem;
+  stop
+else (nie)
+  if (Kod odbioru poprawny?) then (tak)
+    :Przesyłka zostaje udostępniona klientowi;
+    :System zmienia status przesyłki na "Odebrana";
+    :System zapisuje operację;
+    stop
+  else (nie)
+    :System blokuje odbiór;
+    :Informuje klienta o błędzie;
+    stop
+  endif
+endif
+
+@enduml

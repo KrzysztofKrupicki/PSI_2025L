@@ -1,0 +1,22 @@
+@startuml
+start
+
+:Operator wybiera opcję zarządzania przesyłkami;
+:System wyświetla listę przesyłek;
+
+switch (Akcja operatora)
+  case (Edycja przesyłki)
+    :Operator modyfikuje dane przesyłki;
+    :System zapisuje zmiany;
+    stop
+  case (Dodanie nowej przesyłki)
+    :Operator wprowadza dane nowej przesyłki;
+    :System zapisuje nową przesyłkę;
+    stop
+  case (Usuniecie przesyłki)
+    :Operator wybiera przesyłkę i klika Usuń;
+    :System usuwa wybraną przesyłkę z systemu;
+    stop
+endswitch
+
+@enduml

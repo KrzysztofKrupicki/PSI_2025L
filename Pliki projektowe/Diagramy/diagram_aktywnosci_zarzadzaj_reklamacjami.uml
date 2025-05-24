@@ -1,0 +1,21 @@
+@startuml
+
+start
+
+:Pracownik otwiera moduł reklamacji;
+:System wyświetla listę zgłoszonych reklamacji;
+:Pracownik wybiera reklamację z listy;
+:System wyświetla szczegóły reklamacji;
+
+if (Dane kompletne?) then (tak)
+  :Pracownik podejmuje decyzję: przyjmij lub odrzuć;
+  :System zapisuje decyzję i aktualizuje status reklamacji;
+else (nie)
+  :System informuje o brakach w danych;
+  stop
+endif
+
+:Pracownik przechodzi do kolejnego zgłoszenia;
+stop
+
+@enduml

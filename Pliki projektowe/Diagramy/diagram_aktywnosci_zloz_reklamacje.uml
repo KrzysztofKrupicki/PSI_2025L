@@ -1,0 +1,18 @@
+@startuml
+
+start
+
+:Klient wybiera opcję "Złóż reklamację";
+:Klient wskazuje przesyłkę, której dotyczy problem;
+:Klient wprowadza opis problemu reklamacji;
+
+if (Opis został podany?) then (tak)
+  :System rejestruje zgłoszenie;
+  :System przesyła zgłoszenie do pracownika obsługi klienta;
+  stop
+else (nie)
+  :System informuje o braku opisu i nie umożliwia wysłania zgłoszenia;
+  stop
+endif
+
+@enduml

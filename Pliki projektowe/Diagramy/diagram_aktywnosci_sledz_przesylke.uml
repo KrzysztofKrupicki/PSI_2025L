@@ -1,0 +1,15 @@
+@startuml
+start
+
+:Użytkownik podaje numer przesyłki;
+:System wyszukuje przesyłkę w bazie danych;
+
+if (Numer przesyłki poprawny?) then (tak)
+  :System wyświetla historię przesyłki;
+  :System wyświetla aktualny status;
+else (nie)
+  :System wyświetla komunikat "Nie znaleziono przesyłki";
+endif
+
+stop
+@enduml

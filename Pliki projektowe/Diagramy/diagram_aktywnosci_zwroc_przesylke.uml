@@ -1,0 +1,27 @@
+@startuml
+
+start
+
+:Klient wybiera opcję "Zwróć przesyłkę";
+:Klient wprowadza numer przesyłki lub wybiera z listy;
+
+if (Numer przesyłki poprawny?) then (tak)
+  :System generuje etykietę zwrotną i instrukcje;
+  
+  if (Etykieta wygenerowana?) then (tak)
+    :Klient nadaje przesyłkę (automat lub kurier);
+    :System zmienia status na "Zwrot w toku";
+    :System zapisuje historię operacji;
+    stop
+  else (nie)
+    :System informuje o błędzie generowania etykiety;
+    :Klient kontaktuje się z obsługą;
+    stop
+  endif
+
+else (nie)
+  :System informuje o błędnym numerze;
+  :Klient ponownie wprowadza numer;
+  stop
+endif
+@enduml

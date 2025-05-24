@@ -1,0 +1,37 @@
+@startuml
+start
+
+:Otwórz moduł "Zarządzaj oddziałem i flotą";
+:Wybierz oddział;
+:Wyświetl dane pracowników i floty;
+    :Operator wybiera akcję;
+    switch (Akcja)
+        case (Edytuj dane pracownika)
+            :Edytuj dane pracownika;
+        case (Dodaj pracownika)
+            if (Dane kompletne?) then (tak)
+                :Dodaj pracownika;
+            else (nie)
+                :Wyświetl komunikat o brakach;
+                stop
+            endif
+        case (Usuń pracownika)
+            :Usuń pracownika;
+        case (Przypisz pojazd)
+            :Przypisz pojazd;
+        case (Dodaj pojazd)
+            if (Dane kompletne?) then (tak)
+                :Dodaj pojazd;
+            else (nie)
+                :Wyświetl błąd danych pojazdu;
+                stop
+            endif
+        case (Edytuj pojazd)
+            :Edytuj pojazd;
+        case (Usuń pojazd)
+            :Usuń pojazd;
+    endswitch
+
+:Zapisz wszystkie zmiany;
+stop
+@enduml

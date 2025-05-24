@@ -1,0 +1,28 @@
+@startuml
+start
+
+:U¿ytkownik wybiera opcjê "Zarejestruj konto";
+:Wyœwietl formularz rejestracyjny;
+
+:U¿ytkownik wprowadza dane;
+if (Dane kompletne?) then (tak)
+  if (Dane poprawne?) then (tak)
+    if (E-mail unikalny?) then (tak)
+      :Zapisz konto w bazie danych;
+      :Ustaw domyœln¹ rolê: klient;
+      :Wyœwietl komunikat o powodzeniu;
+    else (nie)
+      :Wyœwietl komunikat: e-mail ju¿ u¿ywany;
+      stop
+    endif
+  else (nie)
+    :Wyœwietl b³êdy walidacji (np. e-mail, has³o);
+    stop
+  endif
+else (nie)
+  :Wyœwietl komunikat o brakuj¹cych polach;
+  stop
+endif
+
+stop
+@enduml

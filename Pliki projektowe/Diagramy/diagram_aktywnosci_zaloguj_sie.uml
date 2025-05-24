@@ -1,0 +1,22 @@
+@startuml
+start
+
+:U¿ytkownik wybiera opcjê "Zaloguj siê";
+:Wyœwietl formularz logowania;
+
+:U¿ytkownik wprowadza e-mail i has³o;
+
+if (Dane kompletne?) then (tak)
+  :Waliduj poprawnoœæ danych;
+  if (Dane poprawne?) then (tak)
+    :Przyznaj dostêp na podstawie roli;
+    :Przekieruj do odpowiedniego panelu (klient, kurier, operator, pracownik);
+  else (nie)
+    :Wyœwietl komunikat: nieprawid³owy e-mail lub has³o;
+  endif
+else (nie)
+  :Wyœwietl komunikat: brakuj¹ce pola;
+endif
+
+stop
+@enduml

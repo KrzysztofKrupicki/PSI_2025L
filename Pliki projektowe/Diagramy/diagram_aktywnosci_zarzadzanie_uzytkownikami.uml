@@ -1,0 +1,28 @@
+@startuml
+start
+
+:Operator loguje się do panelu administracyjnego;
+:System wyświetla listę wszystkich użytkowników;
+
+    switch (Wybrana operacja)
+        case (Edytuj dane)
+            :Operator edytuje dane użytkownika;
+            :System zapisuje zmiany;
+        case (Zmień rolę)
+            :Operator zmienia przypisaną rolę;
+            :System aktualizuje poziom dostępu;
+        case (Usuń konto)
+            :Operator usuwa konto użytkownika;
+            :System usuwa dane użytkownika;
+        case (Dodaj nowego użytkownika)
+            :Operator podaje dane i przypisuje rolę;
+            if (Dane kompletne?) then (tak)
+                :System zapisuje konto i przypisuje rolę;
+            else (nie)
+                :System informuje o brakach;
+                stop
+            endif
+    endswitch
+
+stop
+@enduml
