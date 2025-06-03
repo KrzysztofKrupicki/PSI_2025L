@@ -13,3 +13,4 @@ Sprawozdanie 6 - Projektowanie interfejsu użytkownika [LINK](Sprawozdania/Spraw
 
 
 Dokumentacja - [LINK](Dokumentacja.pdf)
+Prezentacja - [LINK] (https://gamma.app/docs/8zg0p875u6py6b9)
