@@ -12,5 +12,5 @@ Sprawozdanie 5 - Projektowanie danych [LINK](Sprawozdania/Sprawozdanie%205%20-%P
 Sprawozdanie 6 - Projektowanie interfejsu użytkownika [LINK](Sprawozdania/Sprawozdanie%206%20-%20Projektowanie%20interfejsu%20użytkownika.pdf)
 
 
-Dokumentacja - [LINK](Dokumentacja.pdf)
-Prezentacja - [LINK] (https://gamma.app/docs/8zg0p875u6py6b9)
+Dokumentacja - [LINK](Dokumentacja.pdf) \
+Prezentacja - [LINK](https://gamma.app/docs/8zg0p875u6py6b9)
